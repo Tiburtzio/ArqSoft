@@ -12,8 +12,9 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:drawSelectorOnTop="false" >
-    </ListView>
+        android:drawSelectorOnTop="false"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="16dp"></ListView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

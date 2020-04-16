@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">testListParseMVC</string>
+    <string name="app_name" translatable="false">ConexionProyecto</string>
     <string name="add_point">Add Point Lon-Lat</string>
 
     <string name="longitud">Longitud</string>
@@ -19,5 +19,8 @@
     <string name="action_new">New Position</string>
     <string name="action_get">Update Positions</string>
 
+    <string name="addingredient_name">Nombre del ingrediente</string>
+    <string name="button_add_name_ing">Añadir Ingrediente</string>
+    <string name="title_activity_addIngredient">AddIngredientActivity</string>
 
 </resources>

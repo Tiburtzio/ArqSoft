@@ -29,6 +29,7 @@ public class MainListActivity extends AppCompatActivity {
 
     private static final int SHOW_SUBACTIVITY = 1;
     private static final int SHOW_ADDACTIVITY = 2;
+    private static final int SHOW_ADDINGACTIVITY = 3;
     private ListView listView;
     private ArrayAdapter<InterestPoint> todoItemsAdapter;
     TravelPointsApplication tpa;
@@ -47,6 +48,16 @@ public class MainListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(tpa, AddPointActivity.class);
                 startActivityForResult(intent, SHOW_ADDACTIVITY);
+            }
+        });
+
+        //Boton añadir ingredientes
+        FloatingActionButton botonIngredientes = findViewById(R.id.ingredientes);
+        botonIngredientes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(tpa, AddIngredientActivity.class);
+                startActivityForResult(intent, SHOW_ADDINGACTIVITY);
             }
         });
 
@@ -120,6 +131,13 @@ public class MainListActivity extends AppCompatActivity {
                 Double latitud = bundle.getDouble("latitud");
                 Double longitud = bundle.getDouble("longitud");
                 newParseObject("",latitud,longitud);
+
+            }
+
+            else if(requestCode == SHOW_ADDINGACTIVITY)
+            {
+                Bundle bundle = data.getExtras();
+                String nombre = bundle.getString("nombre");
 
             }
 

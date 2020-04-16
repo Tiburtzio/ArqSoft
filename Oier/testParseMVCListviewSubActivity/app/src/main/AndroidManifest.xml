@@ -28,6 +28,10 @@
             android:name="com.example.testParseMVCListViewSubActivity.AddPointActivity"
             android:label="@string/title_activity_addPoint" >
         </activity>
+        <activity
+            android:name="com.example.testParseMVCListViewSubActivity.AddIngredientActivity"
+            android:label="@string/title_activity_addIngredient" >
+        </activity>
     </application>
 
 </manifest>
