@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name" translatable="false">testListParseMVC</string>
+    <string name="add_point">Add Point Lon-Lat</string>
+
+    <string name="longitud">Longitud</string>
+    <string name="latitud">Latitud</string>
+    <string name="edit_point_name">Enter Point Name</string>
+    <string name="button_change_name">Change Point Name</string>
+
+    <string name="addlatitud_message">Add Latitud</string>
+    <string name="addlongitud_message">Add Longitud</string>
+    <string name="button_add_location">Create Location</string>
+
+
+    <string name="title_activity_display">DisplayActivity</string>
+    <string name="title_activity_addPoint">AddPointActivity</string>
+    <string name="action_new">New Position</string>
+    <string name="action_get">Update Positions</string>
+
+
+</resources>
