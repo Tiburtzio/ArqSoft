@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.testParseMVCListViewSubActivity.Model.Ingrediente;
 import com.example.testParseMVCListViewSubActivity.Model.InterestPoint;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
@@ -35,6 +36,11 @@ public class MainListActivity extends AppCompatActivity {
     TravelPointsApplication tpa;
     private InterestPoint aInterestPoint;
 
+    //Objetos necesarios para los ingredientes
+    private ArrayAdapter<Ingrediente> todoItemsAdapter2;
+    IngredientApplication ia;
+    private Ingrediente aIngrediente;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +62,14 @@ public class MainListActivity extends AppCompatActivity {
         botonIngredientes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(tpa, AddIngredientActivity.class);
+                Intent intent = new Intent(ia, AddIngredientActivity.class);
                 startActivityForResult(intent, SHOW_ADDINGACTIVITY);
             }
         });
 
         listView = (ListView) findViewById(R.id.list);
         tpa = (TravelPointsApplication)getApplicationContext();
+        ia = (IngredientApplication)getApplicationContext();
         getServerList();
     }
 
@@ -220,5 +227,54 @@ public class MainListActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void getServerList2(){
+
+        ParseQuery<Ingrediente> query = ParseQuery.getQuery("Ingrediente");
+        query.findInBackground(new FindCallback<Ingrediente>() {
+            public void done(List<Ingrediente> objects, ParseException e) {
+                if (e == null) {
+                    ia.ingredientList = objects;
+                    if (todoItemsAdapter2==null) {
+                        todoItemsAdapter2 = new ArrayAdapter<Ingrediente>(getApplicationContext(), R.layout.row_layout, R.id.listText, ia.ingredientList);
+                        listView.setAdapter(todoItemsAdapter2);
+
+                        Log.d("object query server:", "todoItemsAdapter2= null");
+
+                    }
+                    else
+                    {
+                        todoItemsAdapter2.notifyDataSetChanged();
+                        Log.d("object query server:", "todoItemsAdapter2= notifyDataSetChanged");
+
+                    }
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            Ingrediente item2 = (Ingrediente) listView.getItemAtPosition(position);
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("position", position);
+                            bundle.putString("nombre",item2.getNombre());
+
+                            //FALTA APAÑAR ESTO!!!!
+                            Intent intent = new Intent(tpa, DisplayActivity.class);
+                            intent.putExtras(bundle);
+                            startActivityForResult(intent, SHOW_SUBACTIVITY);
+                            //EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
+                        }
+                    });
+                    Log.d("query OK ", "getServerList()");
+                } else {
+                    Log.d("error query, reason: " + e.getMessage(), "getServerList()");
+                    Toast.makeText(
+                            getBaseContext(),
+                            "getServerList(): error  query, reason: " + e.getMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
