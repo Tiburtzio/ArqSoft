@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,12 +40,13 @@ public class ListaIngredientes extends RecyclerView.Adapter<ListaIngredientes.My
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         // Rellenar los campos de la tarjeta de ingrediente con los valores correspondientes
-        // Establecer el nombre del ingrediente
+        // TODO descomentar la línea de abajo
+        // holder.imagenIngrediente.setImageBitmap(listaIngredientes.get(position).getImagen());
         holder.checkIngrediente.setText(listaIngredientes.get(position).getNombre());
         holder.checkIngrediente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(myContext, "Checkbox " + position + " click!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(myContext, "Pulsado el ingrediente número " + position, Toast.LENGTH_SHORT).show();
                 if (listaIngredientes.get(position).getSelected()) {
                     listaIngredientes.get(position).setSelected(false);
                     checkedIngredientes.remove(listaIngredientes.get(position));
@@ -65,10 +67,12 @@ public class ListaIngredientes extends RecyclerView.Adapter<ListaIngredientes.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
         // Obtener los campos de la tarjeta
         private CheckBox checkIngrediente;  // Checkbox con el nombre del ingrediente
+        private ImageView imagenIngrediente;    // Imagen del ingrediente
 
         public MyViewHolder(View itemView){
             super(itemView);
             checkIngrediente = itemView.findViewById(R.id.check_ingrediente);
+            imagenIngrediente = itemView.findViewById(R.id.imagen_ingrediente);
         }
     }
 }
