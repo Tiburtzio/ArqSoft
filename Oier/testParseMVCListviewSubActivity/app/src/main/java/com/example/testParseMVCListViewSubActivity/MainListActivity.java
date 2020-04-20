@@ -145,7 +145,7 @@ public class MainListActivity extends AppCompatActivity {
             {
                 Bundle bundle = data.getExtras();
                 String nombre = bundle.getString("nombre");
-
+                newParseObject2(nombre);
             }
 
         }
@@ -168,6 +168,33 @@ public class MainListActivity extends AppCompatActivity {
                     //            Toast.LENGTH_SHORT).show();
                     tpa.pointList.add(aInterestPoint);
                     todoItemsAdapter.notifyDataSetChanged();
+                    Log.d("object saved in server:", "newParseObject()");
+                } else {
+                    Log.d("save failed, reason: "+ e.getMessage(), "newParseObject()");
+                    Toast.makeText(
+                            getBaseContext(),
+                            "newParseObject(): Object save failed  to server, reason: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+    }
+
+    public void newParseObject2(String name) {
+
+        aIngrediente = new Ingrediente();
+        aIngrediente.setNombre(name);
+
+        aIngrediente.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    //    Toast.makeText(
+                    //            getBaseContext(),
+                    //            "newParseObject(): object saved in server: " + aIngrediente.getObjectId(),
+                    //            Toast.LENGTH_SHORT).show();
+                    ia.ingredientList.add(aIngrediente);
+                    todoItemsAdapter2.notifyDataSetChanged();
                     Log.d("object saved in server:", "newParseObject()");
                 } else {
                     Log.d("save failed, reason: "+ e.getMessage(), "newParseObject()");
