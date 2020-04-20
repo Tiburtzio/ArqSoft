@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">ConexionProyecto</string>
+    <string name="app_name" translatable="false">ConexionProyecto-V5</string>
     <string name="add_point">Add Point Lon-Lat</string>
 
-    <string name="longitud">Longitud</string>
-    <string name="latitud">Latitud</string>
-    <string name="edit_point_name">Enter Point Name</string>
-    <string name="button_change_name">Change Point Name</string>
+    <string name="edit_name">Nuevo nombre</string>
+    <string name="button_change_name">Cambiar nombre</string>
 
     <string name="addlatitud_message">Add Latitud</string>
     <string name="addlongitud_message">Add Longitud</string>
@@ -16,8 +14,8 @@
 
     <string name="title_activity_display">DisplayActivity</string>
     <string name="title_activity_addPoint">AddPointActivity</string>
-    <string name="action_new">New Position</string>
-    <string name="action_get">Update Positions</string>
+    <string name="action_new">Nuevo Ingrediente</string>
+    <string name="action_get">Actualizar ingredientes</string>
 
     <string name="addingredient_name">Nombre del ingrediente</string>
     <string name="button_add_name_ing">Añadir Ingrediente</string>
