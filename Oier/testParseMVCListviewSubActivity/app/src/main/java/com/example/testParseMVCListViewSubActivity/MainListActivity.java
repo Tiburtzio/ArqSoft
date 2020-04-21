@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.testParseMVCListViewSubActivity.Model.Ingrediente;
+import com.example.testParseMVCListViewSubActivity.Model.Receta;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -28,13 +29,15 @@ import java.util.List;
 public class MainListActivity extends AppCompatActivity {
 
     private static final int SHOW_SUBACTIVITY = 1;
-    private static final int SHOW_ADDINGACTIVITY = 3;
+    private static final int SHOW_ADDINGACTIVITY = 2;
+    private static final int SHOW_ADDRECACTIVITY = 3;
     private ListView listView;
 
-    //Objetos necesarios para los ingredientes
-    private ArrayAdapter<Ingrediente> todoItemsAdapter2;
+    private ArrayAdapter<Ingrediente> todoItemsAdapter;
     IngredientApplication ia;
     private Ingrediente aIngrediente;
+    private Receta aReceta;
+    private ArrayAdapter<Receta> todoItemsAdapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +81,15 @@ public class MainListActivity extends AppCompatActivity {
                 break;
             }
 
-            case R.id.action_new: {
+            case R.id.action_new_ingredient: {
                 Intent intent = new Intent(ia, AddIngredientActivity.class);
                 startActivityForResult(intent, SHOW_ADDINGACTIVITY);
+                break;
+            }
+
+            case R.id.action_new_receta: {
+                Intent intent = new Intent(ia, AddRecetaActivity.class);
+                startActivityForResult(intent, SHOW_ADDRECACTIVITY);
                 break;
             }
         }
@@ -104,7 +113,7 @@ public class MainListActivity extends AppCompatActivity {
                             //            getBaseContext(),
                             //            "newParseObject(): object saved in server: " + aInterestPoint.getObjectId(),
                             //            Toast.LENGTH_SHORT).show();
-                            todoItemsAdapter2.notifyDataSetChanged();
+                            todoItemsAdapter.notifyDataSetChanged();
                             Log.d("object udpate server:", "update()");
                         } else {
                             Log.d("update failed, reason: "+ e.getMessage(), "update()");
@@ -124,9 +133,44 @@ public class MainListActivity extends AppCompatActivity {
                 newParseObject2(nombre);
             }
 
+            else if(requestCode == SHOW_ADDRECACTIVITY)
+            {
+                Bundle bundle = data.getExtras();
+                String nombre = bundle.getString("nombre");
+                String descripcion = bundle.getString("descripcion");
+                newParseObject(nombre,descripcion);
+            }
+
         }
     }
 
+    public void newParseObject(String name, String desc) {
+
+        aReceta = new Receta();
+        aReceta.setNombre(name);
+        aReceta.setDescripcion(desc);
+
+        aReceta.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    //    Toast.makeText(
+                    //            getBaseContext(),
+                    //            "newParseObject(): object saved in server: " + aIngrediente.getObjectId(),
+                    //            Toast.LENGTH_SHORT).show();
+                    ia.recetaList.add(aReceta);
+                    todoItemsAdapter2.notifyDataSetChanged();
+                    Log.d("object saved in server:", "newParseObject()");
+                } else {
+                    Log.d("save failed, reason: "+ e.getMessage(), "newParseObject()");
+                    Toast.makeText(
+                            getBaseContext(),
+                            "newParseObject(): Object save failed  to server, reason: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+    }
 
     public void newParseObject2(String name) {
 
@@ -142,7 +186,7 @@ public class MainListActivity extends AppCompatActivity {
                     //            "newParseObject(): object saved in server: " + aIngrediente.getObjectId(),
                     //            Toast.LENGTH_SHORT).show();
                     ia.ingredientList.add(aIngrediente);
-                    todoItemsAdapter2.notifyDataSetChanged();
+                    todoItemsAdapter.notifyDataSetChanged();
                     Log.d("object saved in server:", "newParseObject()");
                 } else {
                     Log.d("save failed, reason: "+ e.getMessage(), "newParseObject()");
@@ -163,16 +207,16 @@ public class MainListActivity extends AppCompatActivity {
             public void done(List<Ingrediente> objects, ParseException e) {
                 if (e == null) {
                     ia.ingredientList = objects;
-                    if (todoItemsAdapter2==null) {
-                        todoItemsAdapter2 = new ArrayAdapter<Ingrediente>(getApplicationContext(), R.layout.row_layout, R.id.listText, ia.ingredientList);
-                        listView.setAdapter(todoItemsAdapter2);
+                    if (todoItemsAdapter ==null) {
+                        todoItemsAdapter = new ArrayAdapter<Ingrediente>(getApplicationContext(), R.layout.row_layout, R.id.listText, ia.ingredientList);
+                        listView.setAdapter(todoItemsAdapter);
 
                         Log.d("object query server:", "todoItemsAdapter2= null");
 
                     }
                     else
                     {
-                        todoItemsAdapter2.notifyDataSetChanged();
+                        todoItemsAdapter.notifyDataSetChanged();
                         Log.d("object query server:", "todoItemsAdapter2= notifyDataSetChanged");
 
                     }

@@ -4,13 +4,23 @@
     tools:context="com.example.testParseMVCListViewSubActivity.MainListActivity">
 
     <item
-        android:id="@+id/action_new"
+        android:id="@+id/action_new_ingredient"
         android:title="@string/action_new">
     </item>
 
     <item
         android:id="@+id/action_get"
         android:title="@string/action_get">
+    </item>
+
+    <item
+        android:id="@+id/action_new_receta"
+        android:title="@string/action_new_receta">
+    </item>
+
+    <item
+        android:id="@+id/action_get_receta"
+        android:title="@string/action_get_receta">
     </item>
 
 </menu>

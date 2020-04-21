@@ -7,10 +7,7 @@
     <string name="edit_name">Nuevo nombre</string>
     <string name="button_change_name">Cambiar nombre</string>
 
-    <string name="addlatitud_message">Add Latitud</string>
-    <string name="addlongitud_message">Add Longitud</string>
     <string name="button_add_location">Create Location</string>
-
 
     <string name="title_activity_display">DisplayActivity</string>
     <string name="title_activity_addPoint">AddPointActivity</string>
@@ -20,5 +17,16 @@
     <string name="addingredient_name">Nombre del ingrediente</string>
     <string name="button_add_name_ing">Añadir Ingrediente</string>
     <string name="title_activity_addIngredient">AddIngredientActivity</string>
+
+    <string name="action_new_receta">Nueva Receta</string>
+    <string name="action_get_receta">Ver Recetas</string>
+    <string name="title_activity_addReceta">AddRecetaActivity</string>
+
+    <string name="addreceta_name">Nombre de la Receta</string>
+    <string name="addreceta_explicacion">De esta parte se encarga el otro compañero,
+        para hacer la parte de la conexion solo recojo dos textos: Nombre y descripcion.
+        Al integrar el codigo habra que ver si hace falta algo mas.</string>
+    <string name="addreceta_des">Descripcion de la Receta</string>
+    <string name="button_add_name_rec">Añadir Receta</string>
 
 </resources>
